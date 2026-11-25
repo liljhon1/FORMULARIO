@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de consulta - TUCONEX</title>
+<style>
+  :root { --primary:#176b68; --primary-dark:#10504e; --whatsapp:#25d366; --whatsapp-dark:#1da851; --accent:#d9f1ec; --bg:#f3f7f8; --text:#21313a; --muted:#60727b; --border:#d6e1e4; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Arial,Helvetica,sans-serif; color:var(--text); background:var(--bg); line-height:1.5; }
+  header { background:linear-gradient(135deg,var(--primary-dark),var(--primary)); color:white; padding:30px 18px; }
+  .header-inner, main { max-width:1000px; margin:0 auto; }
+  h1 { margin:0 0 8px; font-size:clamp(1.6rem,4vw,2.2rem); }
+  header p { margin:0; max-width:780px; }
+  main { padding:22px 16px 50px; }
+  .notice { background:#fff; border-left:5px solid var(--primary); padding:14px 16px; border-radius:8px; margin-bottom:18px; }
+  section { background:#fff; border:1px solid var(--border); border-radius:12px; padding:20px; margin:18px 0; box-shadow:0 3px 12px #2030400a; }
+  h2 { margin:0 0 15px; color:var(--primary-dark); font-size:1.25rem; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .field { margin:12px 0 18px; }
+  label, .question-title { display:block; font-weight:600; margin-bottom:7px; }
+  input[type="text"], input[type="email"], input[type="date"], input[type="time"], input[type="number"], select, textarea {
+    width:100%; border:1px solid #b9cbd0; border-radius:7px; padding:10px 11px; font:inherit; background:white; color:var(--text);
+  }
+  textarea { min-height:85px; resize:vertical; }
+  .question { padding:14px 0; border-top:1px solid #e8eef0; }
+  .question:first-of-type { border-top:0; }
+  .q-number { color:var(--primary); font-weight:700; }
+  .hint { font-size:.9rem; color:var(--muted); margin:5px 0 8px; }
+  .options { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:8px 14px; margin-top:8px; }
+  .options label { font-weight:400; display:flex; align-items:flex-start; gap:8px; margin:0; }
+  .options input { margin-top:5px; accent-color:var(--primary); }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; position:sticky; bottom:0; background:#ffffffed; padding:13px 0; border-top:1px solid var(--border); align-items:center; }
+  button { border:0; border-radius:8px; padding:11px 16px; font:inherit; font-weight:700; cursor:pointer; }
+  .primary { background:var(--primary); color:#fff; }
+  .whatsapp-btn { background:var(--whatsapp); color:#fff; display:inline-flex; align-items:center; gap:8px; font-size:1rem; box-shadow:0 2px 8px rgba(37,211,102,0.3); }
+  .whatsapp-btn:hover { background:var(--whatsapp-dark); }
+  .secondary { background:#e5eeee; color:#21313a; }
+  .danger { background:#fff0ef; color:#8b2923; }
+  .small { font-size:.9rem; font-weight:400; color:var(--muted); }
+  .status { margin-left:auto; align-self:center; color:var(--muted); font-size:.9rem; }
+  @media print { body{background:white} header{background:white;color:black;padding:10px 0} main{padding:0} section{box-shadow:none;break-inside:avoid} .actions,.no-print{display:none!important} input,textarea,select{border:0!important;border-bottom:1px solid #999!important;border-radius:0!important} }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <h1>Formulario de consulta — TUCONEX</h1>
+    <p>Levantamiento de requisitos para una aplicación de educación sexual, aprendizaje, autocuidado y prevención de infecciones y enfermedades de transmisión sexual (ITS/ETS).</p>
+  </div>
+</header>
+<main>
+  <div class="notice">
+    <strong>Instrucciones:</strong> escribe en los campos y marca las opciones que correspondan. Puedes guardar tus respuestas en este navegador, descargar una copia en formato JSON, enviarlas por WhatsApp o imprimir el formulario.
+  </div>
+
+  <form id="tuconexForm">
+    <section>
+      <h2>Datos de la consulta</h2>
+      <div class="grid">
+        <div class="field"><label for="interviewee">Nombre del entrevistado</label><input id="interviewee" name="Nombre del entrevistado" type="text"></div>
+        <div class="field"><label for="role">Cargo, grado o área</label><input id="role" name="Cargo, grado o área" type="text" placeholder="Ej. Coordinador, docente, estudiante"></div>
+        <div class="field"><label for="date">Fecha de la entrevista</label><input id="date" name="Fecha de la entrevista" type="date"></div>
+        <div class="field"><label for="start">Hora de inicio</label><input id="start" name="Hora de inicio" type="time"></div>
+        <div class="field"><label for="end">Hora de finalización</label><input id="end" name="Hora de finalización" type="time"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>A. Contexto y situación actual</h2>
+      <div class="question"><label class="question-title" for="q1"><span class="q-number">1.</span> ¿Cómo reciben actualmente los estudiantes información sobre educación sexual y las ITS/ETS?</label><textarea id="q1" name="1. Información actual"></textarea></div>
+      <div class="question"><label class="question-title" for="q2"><span class="q-number">2.</span> ¿Qué materiales se usan actualmente para enseñar sobre educación sexual y prevención de ITS/ETS?</label><textarea id="q2" name="2. Materiales actuales"></textarea></div>
+      <div class="question"><label class="question-title" for="q3"><span class="q-number">3.</span> ¿Qué dudas tienen los estudiantes sobre las ITS/ETS y dónde buscan respuestas?</label><textarea id="q3" name="3. Dudas frecuentes"></textarea></div>
+      <div class="question"><span class="question-title"><span class="q-number">4.</span> ¿Cada cuánto se habla de educación sexual y prevención de ITS/ETS en la institución?</span><div class="options">
+        <label><input type="radio" name="4. Frecuencia" value="Diariamente">Diariamente</label><label><input type="radio" name="4. Frecuencia" value="Varias veces por semana">Varias veces por semana</label><label><input type="radio" name="4. Frecuencia" value="Semanalmente">Semanalmente</label><label><input type="radio" name="4. Frecuencia" value="Mensualmente">Mensualmente</label><label><input type="radio" name="4. Frecuencia" value="En ocasiones especiales">En ocasiones especiales</label><label><input type="radio" name="4. Frecuencia" value="No se realiza / no hay registro">No se realiza / no hay registro</label>
+      </div></div>
+      <div class="question"><label class="question-title" for="q5"><span class="q-number">5.</span> ¿Cuándo y dónde sería más útil que los estudiantes usaran TUCONEX?</label><textarea id="q5" name="5. Uso de TUCONEX"></textarea></div>
+      <div class="question"><span class="question-title"><span class="q-number">6.</span> ¿Qué información debería mostrar TUCONEX sobre cada ITS/ETS?</span><div class="options">
+        <label><input type="checkbox" name="6. Información por ITS/ETS" value="Nombre y descripción">Nombre y descripción</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Formas de transmisión">Formas de transmisión</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Síntomas y señales de alerta">Síntomas y señales de alerta</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Formas de prevención">Formas de prevención</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Pruebas y diagnóstico profesional">Pruebas y diagnóstico profesional</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Tratamiento y atención médica">Tratamiento y atención médica</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Mitos y realidades">Mitos y realidades</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Recursos de ayuda y orientación">Recursos de ayuda y orientación</label><label><input type="checkbox" name="6. Información por ITS/ETS" value="Imágenes o ilustraciones educativas">Imágenes o ilustraciones educativas</label>
+      </div></div>
+    </section>
+
+    <section>
+      <h2>B. Objetivos y funciones de la aplicación</h2>
+      <div class="question"><label class="question-title" for="q7"><span class="q-number">7.</span> ¿Qué le gustaría lograr con la aplicación TUCONEX?</label><textarea id="q7" name="7. Objetivo principal"></textarea></div>
+      <div class="question"><span class="question-title"><span class="q-number">8.</span> ¿Qué funciones debería tener TUCONEX desde su primera versión?</span><div class="options">
+        <label><input type="checkbox" name="8. Funciones" value="Información sobre ITS/ETS">Información sobre ITS/ETS</label><label><input type="checkbox" name="8. Funciones" value="Educación sexual y autocuidado">Educación sexual y autocuidado</label><label><input type="checkbox" name="8. Funciones" value="Métodos de prevención">Métodos de prevención</label><label><input type="checkbox" name="8. Funciones" value="Registro e inicio de sesión">Registro e inicio de sesión</label><label><input type="checkbox" name="8. Funciones" value="Foro educativo">Foro educativo</label><label><input type="checkbox" name="8. Funciones" value="Novedades y publicaciones">Novedades y publicaciones</label><label><input type="checkbox" name="8. Funciones" value="Ayuda y preguntas frecuentes">Ayuda y preguntas frecuentes</label><label><input type="checkbox" name="8. Funciones" value="Contactos de EPS o servicios de salud">Contactos de EPS o servicios de salud</label><label><input type="checkbox" name="8. Funciones" value="Reportar contenido o problemas">Reportar contenido o problemas</label><label><input type="checkbox" name="8. Funciones" value="Chat o canal de orientación">Chat o canal de orientación</label><label><input type="checkbox" name="8. Funciones" value="Otro">Otro</label>
+      </div></div>
+      <div class="question"><span class="question-title"><span class="q-number">9.</span> ¿Quiénes usarían la aplicación TUCONEX?</span><div class="options">
+        <label><input type="checkbox" name="9. Tipos de usuario" value="Estudiantes">Estudiantes</label><label><input type="checkbox" name="9. Tipos de usuario" value="Adolescentes y jóvenes">Adolescentes y jóvenes</label><label><input type="checkbox" name="9. Tipos de usuario" value="Docentes">Docentes</label><label><input type="checkbox" name="9. Tipos de usuario" value="Orientadores escolares">Orientadores escolares</label><label><input type="checkbox" name="9. Tipos de usuario" value="Administradores">Administradores</label><label><input type="checkbox" name="9. Tipos de usuario" value="Padres o acudientes">Padres o acudientes</label><label><input type="checkbox" name="9. Tipos de usuario" value="Otro">Otro</label>
+      </div></div>
+      <div class="question"><label class="question-title" for="q10"><span class="q-number">10.</span> ¿Quién debería revisar y actualizar la información de la aplicación?</label><select id="q10" name="10. Responsable del contenido"><option value="">Selecciona una opción</option><option>Administrador de TUCONEX</option><option>Docente u orientador capacitado</option><option>Profesional de salud</option><option>Equipo del proyecto</option><option>Otra persona</option></select></div>
+      <div class="question"><span class="question-title"><span class="q-number">11.</span> ¿Le gustaría que la aplicación tuviera un buscador para encontrar información sobre una ITS/ETS específica?</span><div class="options"><label><input type="radio" name="11. Buscador" value="Sí">Sí</label><label><input type="radio" name="11. Buscador" value="No">No</label></div></div>
+      <div class="question"><span class="question-title"><span class="q-number">12.</span> ¿Le gustaría que TUCONEX incluyera enlaces a páginas oficiales de salud?</span><div class="options"><label><input type="radio" name="12. Enlaces oficiales" value="Sí">Sí</label><label><input type="radio" name="12. Enlaces oficiales" value="No">No</label><label><input type="radio" name="12. Enlaces oficiales" value="No estoy seguro/a">No estoy seguro/a</label></div></div>
+    </section>
+
+    <section>
+      <h2>C. Contenido, seguridad y permisos</h2>
+      <div class="question"><span class="question-title"><span class="q-number">13.</span> ¿Qué datos debería incluir la información de cada ITS/ETS?</span><div class="options">
+        <label><input type="checkbox" name="13. Datos de ITS/ETS" value="Nombre y descripción">Nombre y descripción</label><label><input type="checkbox" name="13. Datos de ITS/ETS" value="Formas de transmisión">Formas de transmisión</label><label><input type="checkbox" name="13. Datos de ITS/ETS" value="Síntomas">Síntomas</label><label><input type="checkbox" name="13. Datos de ITS/ETS" value="Prevención">Prevención</label><label><input type="checkbox" name="13. Datos de ITS/ETS" value="Pruebas y diagnóstico profesional">Pruebas y diagnóstico profesional</label><label><input type="checkbox" name="13. Datos de ITS/ETS" value="Tratamiento indicado por profesionales">Tratamiento indicado por profesionales</label><label><input type="checkbox" name="13. Datos de ITS/ETS" value="Fuentes de información">Fuentes de información</label>
+      </div></div>
+      <div class="question"><label class="question-title" for="q14"><span class="q-number">14.</span> ¿Para qué edades o grados deberían estar pensados los contenidos de TUCONEX?</label><input type="text" id="q14" name="14. Edades o grados" placeholder="Ej. De 13 a 18 años, grados 8.º a 11.º"></div>
+      <div class="question"><label class="question-title" for="q15"><span class="q-number">15.</span> ¿Cómo debería explicarse la información para que los estudiantes la entiendan fácilmente?</label><textarea id="q15" name="15. Forma de explicar"></textarea></div>
+      <div class="question"><label class="question-title" for="q16"><span class="q-number">16.</span> Si un usuario tiene síntomas o una duda médica personal, ¿qué debería recomendarle la aplicación?</label><textarea id="q16" name="16. Orientación médica"></textarea></div>
+      <div class="question"><span class="question-title"><span class="q-number">17.</span> ¿Los usuarios deberían poder publicar preguntas o comentarios en el foro?</span><div class="options"><label><input type="radio" name="17. Publicaciones en foro" value="Sí">Sí</label><label><input type="radio" name="17. Publicaciones en foro" value="No">No</label><label><input type="radio" name="17. Publicaciones en foro" value="Solo comentarios">Solo comentarios</label></div></div>
+      <div class="question"><span class="question-title"><span class="q-number">18.</span> ¿Qué funciones debería poder realizar solo el administrador de la aplicación?</span><div class="options">
+        <label><input type="checkbox" name="18. Funciones administrador" value="Publicar, editar o eliminar novedades">Publicar, editar o eliminar novedades</label><label><input type="checkbox" name="18. Funciones administrador" value="Moderar publicaciones del foro">Moderar publicaciones del foro</label><label><input type="checkbox" name="18. Funciones administrador" value="Gestionar cuentas de usuario">Gestionar cuentas de usuario</label><label><input type="checkbox" name="18. Funciones administrador" value="Actualizar información educativa">Actualizar información educativa</label><label><input type="checkbox" name="18. Funciones administrador" value="Revisar reportes de contenido">Revisar reportes de contenido</label><label><input type="checkbox" name="18. Funciones administrador" value="Administrar recursos de ayuda">Administrar recursos de ayuda</label><label><input type="checkbox" name="18. Funciones administrador" value="Modificar permisos y configuración">Modificar permisos y configuración</label>
+      </div></div>
+      <div class="question"><span class="question-title"><span class="q-number">19.</span> ¿Se debería pedir a los usuarios que inicien sesión para usar la aplicación?</span><div class="options"><label><input type="radio" name="19. Inicio de sesión" value="Sí">Sí</label><label><input type="radio" name="19. Inicio de sesión" value="No">No</label><label><input type="radio" name="19. Inicio de sesión" value="Solo para algunas funciones">Solo para algunas funciones</label></div></div>
+      <div class="question"><span class="question-title"><span class="q-number">20.</span> ¿Qué datos personales de los usuarios debe proteger la aplicación?</span><div class="options">
+        <label><input type="checkbox" name="20. Datos a proteger" value="Nombre de usuario">Nombre de usuario</label><label><input type="checkbox" name="20. Datos a proteger" value="Correo electrónico">Correo electrónico</label><label><input type="checkbox" name="20. Datos a proteger" value="Teléfono, si se solicita">Teléfono, si se solicita</label><label><input type="checkbox" name="20. Datos a proteger" value="Contraseña">Contraseña</label><label><input type="checkbox" name="20. Datos a proteger" value="Datos del perfil">Datos del perfil</label><label><input type="checkbox" name="20. Datos a proteger" value="Preguntas o interacciones del foro">Preguntas o interacciones del foro</label><label><input type="checkbox" name="20. Datos a proteger" value="Otra información">Otra información</label>
+      </div></div>
+    </section>
+
+    <section>
+      <h2>D. Funcionamiento e implementación</h2>
+      <div class="question"><span class="question-title"><span class="q-number">21.</span> ¿Qué información sería útil revisar para saber cómo se está usando TUCONEX?</span><div class="options">
+        <label><input type="checkbox" name="21. Estadísticas útiles" value="Temas más consultados">Temas más consultados</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Cantidad de usuarios registrados">Cantidad de usuarios registrados</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Consultas por fecha">Consultas por fecha</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Preguntas frecuentes">Preguntas frecuentes</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Publicaciones reportadas">Publicaciones reportadas</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Novedades más consultadas">Novedades más consultadas</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Problemas reportados">Problemas reportados</label><label><input type="checkbox" name="21. Estadísticas útiles" value="Uso de la sección de ayuda">Uso de la sección de ayuda</label>
+      </div></div>
+      <div class="question"><span class="question-title"><span class="q-number">22.</span> ¿Cada cuánto se deberían revisar las estadísticas y actualizar la información?</span><div class="options"><label><input type="radio" name="22. Frecuencia de revisión" value="Diariamente">Diariamente</label><label><input type="radio" name="22. Frecuencia de revisión" value="Semanalmente">Semanalmente</label><label><input type="radio" name="22. Frecuencia de revisión" value="Mensualmente">Mensualmente</label><label><input type="radio" name="22. Frecuencia de revisión" value="Cuando sea necesario">Cuando sea necesario</label></div></div>
+      <div class="question"><span class="question-title"><span class="q-number">23.</span> ¿En qué dispositivos debería poder usarse TUCONEX?</span><div class="options"><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="Computador de escritorio">Computador de escritorio</label><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="Portátil">Portátil</label><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="Celular Android">Celular Android</label><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="iPhone">iPhone</label><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="Navegador web">Navegador web</label><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="Tableta">Tableta</label><label><input type="checkbox" name="23. Dispositivos de la aplicación" value="Otro">Otro</label></div></div>
+      <div class="question"><span class="question-title"><span class="q-number">24.</span> ¿Qué dispositivos tienen los estudiantes para usar la aplicación?</span><div class="options"><label><input type="checkbox" name="24. Dispositivos disponibles" value="Computadores">Computadores</label><label><input type="checkbox" name="24. Dispositivos disponibles" value="Portátiles">Portátiles</label><label><input type="checkbox" name="24. Dispositivos disponibles" value="Celulares Android">Celulares Android</label><label><input type="checkbox" name="24. Dispositivos disponibles" value="iPhone">iPhone</label><label><input type="checkbox" name="24. Dispositivos disponibles" value="Tabletas">Tabletas</label><label><input type="checkbox" name="24. Dispositivos disponibles" value="No sé">No sé</label></div></div>
+      <div class="question"><span class="question-title"><span class="q-number">25.</span> ¿Los estudiantes tienen acceso a Internet para usar TUCONEX?</span><div class="options"><label><input type="radio" name="25. Acceso a Internet" value="Siempre">Siempre</label><label><input type="radio" name="25. Acceso a Internet" value="Casi siempre">Casi siempre</label><label><input type="radio" name="25. Acceso a Internet" value="A veces">A veces</label><label><input type="radio" name="25. Acceso a Internet" value="No">No</label><label><input type="radio" name="25. Acceso a Internet" value="No sé">No sé</label></div></div>
+      <div class="question"><label class="question-title" for="q26"><span class="q-number">26.</span> ¿Hay páginas web o materiales educativos que deberíamos tener en cuenta para crear TUCONEX?</label><textarea id="q26" name="26. Recursos existentes"></textarea></div>
+      <div class="question"><label class="question-title" for="q27"><span class="q-number">27.</span> ¿Para qué fecha le gustaría tener lista la primera versión de TUCONEX?</label><input type="date" id="q27" name="27. Fecha esperada"></div>
+      <div class="question"><label class="question-title" for="q28"><span class="q-number">28.</span> ¿Qué funciones son indispensables para que la primera versión de TUCONEX sea útil?</label><textarea id="q28" name="28. Funciones indispensables"></textarea></div>
+      <div class="question"><label class="question-title" for="q29"><span class="q-number">29.</span> ¿Quiénes deberían probar la aplicación antes de que se publique?</label><textarea id="q29" name="29. Personas para pruebas"></textarea></div>
+      <div class="question"><label class="question-title" for="q30"><span class="q-number">30.</span> ¿Cómo sabría que TUCONEX está ayudando a los estudiantes a aprender y prevenir las ITS/ETS?</label><textarea id="q30" name="30. Éxito del proyecto"></textarea></div>
+    </section>
+
+    <section>
+      <h2>E. Prioridades finales</h2>
+      <div class="question"><span class="question-title"><span class="q-number">31.</span> Elija las 5 funciones más importantes para la primera versión de TUCONEX.</span><p class="hint">Marca máximo 5 opciones.</p><div class="options" id="priorityOptions">
+        <label><input type="checkbox" name="31. Prioridades" value="Información sobre ITS/ETS">Información sobre ITS/ETS</label><label><input type="checkbox" name="31. Prioridades" value="Prevención y autocuidado">Prevención y autocuidado</label><label><input type="checkbox" name="31. Prioridades" value="Registro e inicio de sesión">Registro e inicio de sesión</label><label><input type="checkbox" name="31. Prioridades" value="Foro educativo">Foro educativo</label><label><input type="checkbox" name="31. Prioridades" value="Novedades">Novedades</label><label><input type="checkbox" name="31. Prioridades" value="Buscador de información">Buscador de información</label><label><input type="checkbox" name="31. Prioridades" value="Sección de ayuda">Sección de ayuda</label><label><input type="checkbox" name="31. Prioridades" value="Contactos de EPS o servicios de salud">Contactos de EPS o servicios de salud</label><label><input type="checkbox" name="31. Prioridades" value="Chat o canal de orientación">Chat o canal de orientación</label><label><input type="checkbox" name="31. Prioridades" value="Reportar contenido">Reportar contenido</label>
+      </div></div>
+      <div class="question"><label class="question-title" for="q32"><span class="q-number">32.</span> ¿Hay algún tema o función importante sobre educación sexual que falte en este formulario?</label><textarea id="q32" name="32. Comentarios adicionales"></textarea></div>
+    </section>
+
+    <div class="actions no-print">
+      <button type="button" class="whatsapp-btn" id="whatsappBtn">Enviar respuestas por WhatsApp</button>
+      <button type="button" class="primary" id="saveBtn">Guardar respuestas en este navegador</button>
+      <button type="button" class="secondary" id="downloadBtn">Descargar respuestas (.json)</button>
+      <button type="button" class="secondary" id="printBtn">Imprimir / guardar como PDF</button>
+      <button type="reset" class="danger" id="resetBtn">Limpiar formulario</button>
+      <span class="status" id="status" aria-live="polite"></span>
+    </div>
+  </form>
+  <p class="small">Privacidad: las respuestas se procesan en tu navegador. Al hacer clic en "Enviar respuestas por WhatsApp", se abrirá un chat directo con el número destino para confirmar el envío.</p>
+</main>
+<script>
+(() => {
+  const form = document.getElementById('tuconexForm');
+  const status = document.getElementById('status');
+  const storageKey = 'tuconex_formulario_consulta_v1';
+  const targetPhone = '573102886454';
+
+  const getData = () => {
+    const data = {};
+    const els = [...form.elements].filter(el => el.name && el.type !== 'button' && el.type !== 'reset');
+    for (const el of els) {
+      if (el.type === 'checkbox') {
+        if (!data[el.name]) data[el.name] = [];
+        if (el.checked) data[el.name].push(el.value);
+      } else if (el.type === 'radio') {
+        if (el.checked) data[el.name] = el.value;
+      } else {
+        data[el.name] = el.value;
+      }
+    }
+    return data;
+  };
+
+  const copyToClipboard = (text) => {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand('copy');
+    } catch (err) {
+      console.error('Error al copiar', err);
+    }
+    document.body.removeChild(textarea);
+  };
+
+  document.getElementById('whatsappBtn').addEventListener('click', () => {
+    const data = getData();
+    let lines = ["*RESPUESTAS CONSULTA TUCONEX*\n"];
+    let hasData = false;
+
+    for (const [key, val] of Object.entries(data)) {
+      if (Array.isArray(val) && val.length > 0) {
+        lines.push(`*${key}:*\n${val.join(', ')}\n`);
+        hasData = true;
+      } else if (typeof val === 'string' && val.trim() !== '') {
+        lines.push(`*${key}:*\n${val.trim()}\n`);
+        hasData = true;
+      }
+    }
+
+    if (!hasData) {
+      status.textContent = 'Diligencie al menos un campo para enviar las respuestas.';
+      return;
+    }
+
+    const fullMessage = lines.join('\n');
+    
+    // Copiamos al portapapeles como respaldo seguro por si la URL es muy larga
+    copyToClipboard(fullMessage);
+
+    // Intentar abrir WhatsApp
+    const encodedText = encodeURIComponent(fullMessage);
+    
+    if (encodedText.length > 1800) {
+      // Si el texto es demasiado largo para una URL, abrimos el chat directo y notificamos
+      status.textContent = 'Las respuestas son extensas. Se han copiado automáticamente a tu portapapeles. Solo pega (Ctrl+V) en el chat.';
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${targetPhone}`;
+      window.open(whatsappUrl, '_blank');
+    } else {
+      status.textContent = 'Abriendo WhatsApp con sus respuestas...';
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodedText}`;
+      window.open(whatsappUrl, '_blank');
+    }
+  });
+
+  document.getElementById('saveBtn').addEventListener('click', () => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(getData()));
+      status.textContent = 'Respuestas guardadas en este navegador.';
+    } catch(e) { 
+      status.textContent = 'No se pudieron guardar las respuestas en este navegador.'; 
+    }
+  });
+
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(getData(), null, 2)], {type:'application/json;charset=utf-8'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'respuestas_TUCONEX.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    status.textContent = 'Archivo de respuestas descargado.';
+  });
+
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    setTimeout(() => { 
+      status.textContent = 'Formulario limpio. Las respuestas guardadas anteriormente no se han borrado.'; 
+    }, 0);
+  });
+
+  const saved = localStorage.getItem(storageKey);
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+      for (const el of [...form.elements]) {
+        if (!el.name || !(el.name in data)) continue;
+        if (el.type === 'checkbox') el.checked = Array.isArray(data[el.name]) && data[el.name].includes(el.value);
+        else if (el.type === 'radio') el.checked = data[el.name] === el.value;
+        else el.value = data[el.name] ?? '';
+      }
+      status.textContent = 'Se cargaron las respuestas guardadas anteriormente.';
+    } catch(e) {}
+  }
+
+  const priority = [...document.querySelectorAll('input[name="31. Prioridades"]')];
+  priority.forEach(el => el.addEventListener('change', () => {
+    const checked = priority.filter(x => x.checked);
+    if (checked.length > 5) {
+      el.checked = false;
+      status.textContent = 'Puedes seleccionar máximo 5 prioridades.';
+    } else {
+      status.textContent = '';
+    }
+  }));
+})();
+</script>
+</body>
+</html>
